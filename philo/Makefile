@@ -6,7 +6,7 @@
 #    By: btenzlin <btenzlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 10:22:29 by btenzlin          #+#    #+#              #
-#    Updated: 2022/02/15 10:24:45 by btenzlin         ###   ########.fr        #
+#    Updated: 2022/02/21 14:17:12 by btenzlin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ NORM = norminette
 GREEN = "\033[1;32m"
 NO_COLOR = "\033[0m"
 
-SRCS = main.c
+SRCS = main.c \
+		ft_atoi.c \
+		init.c
 
 OBJS = ${SRCS:.c=.o}
 
