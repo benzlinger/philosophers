@@ -6,7 +6,7 @@
 /*   By: btenzlin <btenzlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:18:03 by btenzlin          #+#    #+#             */
-/*   Updated: 2022/02/21 17:46:44 by btenzlin         ###   ########.fr       */
+/*   Updated: 2022/02/22 13:05:04 by btenzlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int	main(int argc, char **argv)
 	if (!create_philos(args))
 		return (-1);
 	//system("leaks philo");
+	//TODO: free(philos, forks, (destroy)mutexes, args)!!!
 	return (0);
 }

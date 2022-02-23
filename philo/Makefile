@@ -6,7 +6,7 @@
 #    By: btenzlin <btenzlin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 10:22:29 by btenzlin          #+#    #+#              #
-#    Updated: 2022/02/21 14:17:12 by btenzlin         ###   ########.fr        #
+#    Updated: 2022/02/22 11:12:57 by btenzlin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ NO_COLOR = "\033[0m"
 
 SRCS = main.c \
 		ft_atoi.c \
-		init.c
+		init.c \
+		utils.c \
+		exec.c
 
 OBJS = ${SRCS:.c=.o}
 
