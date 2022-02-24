@@ -6,7 +6,7 @@
 /*   By: btenzlin <btenzlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:20:07 by btenzlin          #+#    #+#             */
-/*   Updated: 2022/02/22 16:53:25 by btenzlin         ###   ########.fr       */
+/*   Updated: 2022/02/24 14:49:40 by btenzlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_philo
 	int				meals;
 	int				fork_left;
 	int				fork_right;
+	long			last_eat;
 }					t_philo;
 
 typedef struct s_args
@@ -37,15 +38,16 @@ typedef struct s_args
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	m_is_alive;
-	pthread_mutex_t	m_eat;
+	pthread_mutex_t	m_meals;
+	pthread_mutex_t	m_print;
 	int				p_num;
 	int				d_time;
 	int				e_time;
 	int				s_time;
 	int				e_num;
 	int				is_alive;
+	int				philos_full;
 	long			start;
-	long			until_dead;
 }					t_args;
 
 /* atoi */
@@ -61,7 +63,8 @@ int		create_philos(t_args *args);
 /* utils */
 long	gettime(void);
 void	philo_action(int id, char *msg, t_philo *philo);
-void	checker(t_philo *philos);
+void	checker(t_args *args, t_philo *philos);
+void	exiter(t_args *args);
 
 /* exec */
 void	*exec_philos(void *philo_c);
