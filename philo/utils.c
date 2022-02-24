@@ -6,7 +6,7 @@
 /*   By: btenzlin <btenzlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:24:56 by btenzlin          #+#    #+#             */
-/*   Updated: 2022/02/24 15:34:17 by btenzlin         ###   ########.fr       */
+/*   Updated: 2022/02/24 18:33:24 by btenzlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,35 +33,6 @@ void	philo_action(int id, char *msg, t_philo *philo)
 	pthread_mutex_unlock(&philo->args->m_print);
 }
 
-// void	checker(t_args *args, t_philo *philos)
-// {
-// 	int	count;
-
-// 	while (!args->philos_full)
-// 	{
-// 		count = 0;
-// 		while (args->is_alive && count < args->p_num)
-// 		{
-// 			pthread_mutex_lock(&(args->m_is_alive));
-// 			if (gettime() >= philos[count].last_eat + args->d_time)
-// 			{
-// 				philo_action(philos[count].id, "died", philos);
-// 				args->is_alive = 0;
-// 			}
-// 			count++;
-// 			pthread_mutex_unlock(&(args->m_is_alive));
-// 		}
-// 		if (!args->is_alive)
-// 			break ;
-// 		count = 0;
-// 		while (args->e_num >= 0 && count < args->p_num
-// 			&& philos[count].meals >= args->e_num)
-// 			count++;
-// 		if (count == args->p_num)
-// 			args->philos_full = 1;
-// 	}
-// }
-
 void	checker(t_args *args, t_philo *philos)
 {
 	int	count;
@@ -69,18 +40,23 @@ void	checker(t_args *args, t_philo *philos)
 	while (args->is_alive)
 	{
 		count = 0;
-		pthread_mutex_lock(&args->m_is_alive);
 		while (count < args->p_num && args->is_alive)
 		{
 			if (gettime() >= philos[count].last_eat + args->d_time)
 			{
+				pthread_mutex_lock(&args->m_is_alive);
 				philo_action(philos[count].id, "died", philos);
 				args->is_alive = 0;
+				pthread_mutex_unlock(&args->m_is_alive);
 			}
-			else if (args->e_num > 0 && philos[count].meals >= args->e_num)
+			else if (args->e_num > 0 && philos[count].meals == args->e_num)
+			{
+				philos[count].meals = -1;
 				args->philos_full++;
+			}
 			count++;
 		}
+		pthread_mutex_lock(&args->m_is_alive);
 		if (args->philos_full >= args->p_num)
 			args->is_alive = 0;
 		pthread_mutex_unlock(&args->m_is_alive);
@@ -99,12 +75,14 @@ void	exiter(t_args *args)
 		pthread_join(philos[count].thread, NULL);
 		count++;
 	}
+	pthread_mutex_unlock(&args->m_print);
+	pthread_mutex_unlock(&args->m_is_alive);
 	pthread_mutex_destroy(&args->m_print);
 	pthread_mutex_destroy(&args->m_is_alive);
-	pthread_mutex_destroy(&args->m_meals);
 	count = 0;
 	while (count < args->p_num)
 	{
+		pthread_mutex_unlock(&args->forks[count]);
 		pthread_mutex_destroy(&args->forks[count]);
 		count++;
 	}
