@@ -6,7 +6,7 @@
 /*   By: btenzlin <btenzlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:15:26 by btenzlin          #+#    #+#             */
-/*   Updated: 2022/02/24 15:00:30 by btenzlin         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:30:13 by btenzlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ int	init_mutex(t_args *args)
 	if (pthread_mutex_init(&args->m_is_alive, NULL))
 		return (0);
 	if (pthread_mutex_init(&args->m_print, NULL))
-		return (0);
-	if (pthread_mutex_init(&args->m_meals, NULL))
 		return (0);
 	return (1);
 }
