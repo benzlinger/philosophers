@@ -6,7 +6,7 @@
 /*   By: btenzlin <btenzlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:20:07 by btenzlin          #+#    #+#             */
-/*   Updated: 2022/02/24 14:49:40 by btenzlin         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:29:16 by btenzlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_args
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	m_is_alive;
-	pthread_mutex_t	m_meals;
 	pthread_mutex_t	m_print;
 	int				p_num;
 	int				d_time;
