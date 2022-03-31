@@ -6,7 +6,7 @@
 /*   By: btenzlin <btenzlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 10:20:07 by btenzlin          #+#    #+#             */
-/*   Updated: 2022/02/24 17:29:16 by btenzlin         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:55:13 by btenzlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <unistd.h>
-# include <limits.h>
 # include <sys/time.h>
 
 struct	s_args;
@@ -64,6 +63,7 @@ long	gettime(void);
 void	philo_action(int id, char *msg, t_philo *philo);
 void	checker(t_args *args, t_philo *philos);
 void	exiter(t_args *args);
+void	wait_for_action(long time, t_args *args);
 
 /* exec */
 void	*exec_philos(void *philo_c);

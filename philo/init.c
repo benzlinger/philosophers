@@ -6,7 +6,7 @@
 /*   By: btenzlin <btenzlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 14:15:26 by btenzlin          #+#    #+#             */
-/*   Updated: 2022/02/24 17:30:13 by btenzlin         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:55:09 by btenzlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_input(char **argv)
 	while (argv[count])
 	{
 		num = ft_atoi(argv[count]);
-		if (num < 0 || num > INT_MAX)
+		if (num <= 0 || num > 2147483647)
 		{
 			printf("Error\nArguments should be positive integers\n");
 			return (0);
@@ -43,8 +43,6 @@ t_args	*init_args(int argc, char **argv)
 	args->e_time = ft_atoi(argv[3]);
 	args->s_time = ft_atoi(argv[4]);
 	args->philos_full = 0;
-	if (args->p_num < 1)
-		return (0);
 	if (argc == 6)
 	{
 		args->e_num = ft_atoi(argv[5]);

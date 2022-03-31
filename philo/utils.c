@@ -6,7 +6,7 @@
 /*   By: btenzlin <btenzlin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:24:56 by btenzlin          #+#    #+#             */
-/*   Updated: 2022/02/24 18:33:24 by btenzlin         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:55:05 by btenzlin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,24 @@ void	philo_action(int id, char *msg, t_philo *philo)
 	pthread_mutex_unlock(&philo->args->m_print);
 }
 
+void	wait_for_action(long time, t_args *args)
+{
+	long	start;
+
+	start = gettime();
+	while ((gettime() < start + time) && args->is_alive)
+		usleep(500);
+	return ;
+}
+
 void	checker(t_args *args, t_philo *philos)
 {
 	int	count;
 
 	while (args->is_alive)
 	{
-		count = 0;
-		while (count < args->p_num && args->is_alive)
+		count = -1;
+		while (++count < args->p_num && args->is_alive)
 		{
 			if (gettime() >= philos[count].last_eat + args->d_time)
 			{
@@ -54,7 +64,6 @@ void	checker(t_args *args, t_philo *philos)
 				philos[count].meals = -1;
 				args->philos_full++;
 			}
-			count++;
 		}
 		pthread_mutex_lock(&args->m_is_alive);
 		if (args->philos_full >= args->p_num)
